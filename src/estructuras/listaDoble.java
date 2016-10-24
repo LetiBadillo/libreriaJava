@@ -21,8 +21,10 @@ public class listaDoble<T> {
             this.first=node;
             this.last=node;
         }else{ //Si la lista tiene elementos
-            node.next=first; //el apuntador sigiuente de nuestro nodo, apunta al primer nodo de la lista.
-            first.prev=node;//el apuntador anterior del primer nodo de la lista apunta al nuevo nodo.
+            node.setNext(first);
+            //node.next=first; //el apuntador sigiuente de nuestro nodo, apunta al primer nodo de la lista.
+            first.setPrev(node);
+            //first.prev=node;//el apuntador anterior del primer nodo de la lista apunta al nuevo nodo.
             first=node; //El apuntador first (que es atributo de la lista) apunta al nuevo nodo.
         }
     }
@@ -33,8 +35,10 @@ public class listaDoble<T> {
             this.first=node;
             this.last=node;
         }else{ //Si la lista tiene elementos
-            last.next=node; //da la última posición al nodo
-            node.prev=last; //Marca el otro nodo como previo del nuevo
+            last.setNext(node);
+            //last.next=node; //da la última posición al nodo
+            node.setPrev(last);
+            //node.prev=last; //Marca el otro nodo como previo del nuevo
             last=node; //El apuntador first (que es atributo de la lista) apunta al nuevo nodo.
         }
     }
@@ -48,8 +52,8 @@ public class listaDoble<T> {
             return null; //si està vacìa regresa falso
         } else{ //si contiene elementos
             aux=first; //colocamos auxiliar al inicio de la lista
-            while(aux.data!=data && aux!=last){ //mientras que no encuentre el dato o no llegue al final de la lista
-                aux=aux.next; //recorrer la lista
+            while(aux.getData()!=data && aux!=last){ //mientras que no encuentre el dato o no llegue al final de la lista
+                aux=aux.getNext(); //recorrer la lista
             } 
                 return aux;//Teoría Montiel
             }
@@ -69,8 +73,12 @@ public boolean eNode(T data){
         if(aux==last){
             eNodeLast();
         }else{
-            aux.prev.next=aux.next;
-            aux.next.prev=aux.prev;
+            aux.getPrev().setNext(aux.getNext());
+            //aux.prev.next=aux.next;
+            
+            aux.getNext().setPrev(aux.getPrev());
+            //aux.setPrev(aux.getNext().getPrev());
+            //aux.next.prev=aux.prev;
         }
             return true;
         }
@@ -79,16 +87,22 @@ public boolean eNode(T data){
 
 public void eNodeFirst(){
     //se mueve el apuntador first al siguiente
-    first=first.next;
+    //first=first.next;
+    
+    first= first.getNext();
     //marcamos el previo como nulo
-    first.prev=null;
+    first.setPrev(null);
+    //first.prev=null;
 }
 
 public void eNodeLast(){
     //se mueve el apuntador final al previo
-    last=last.prev;
+    //last=last.getPrev();
+    
     //se marca el siguiente como nulo
-    last.next=null;
+    last.setNext(null);
+    
+    //last.next=null;
 }
 //insert last, showList, showReverse,
 public void showList(){
@@ -96,8 +110,9 @@ public void showList(){
            nodeDL aux;
            aux=first;
            while (aux!= null){
-               System.out.println(aux.data);
-               aux= aux.next;
+               System.out.println(aux.getData());
+               aux= aux.getNext();
+                //aux= aux.next;
                
            }
             
@@ -112,8 +127,10 @@ public void showReverse(){
            nodeDL aux;
            aux=last;
            while (aux!= null){
-               System.out.println(aux.data);
-               aux= aux.prev;
+               System.out.println(aux.getData());
+               aux = aux.getPrev();
+               //aux= aux.prev;
+               
                
            }
             
