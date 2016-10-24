@@ -57,14 +57,18 @@ public class Queue <T> {
         
     }
      public void deleteAll(){
-         nodeClass temp= last;
+         nodeClass temp;
          if(!isEmpty()){
+             temp=last;
              last.setData(null);
              while(temp.getNext() != first){
                  temp.setNext(null);
+                 temp= temp.getNext();
                  
              }
-             first.setData(null);
+             temp.setNext(null);
+             first=temp;
+             this.size = 0;
          }
      }
             
