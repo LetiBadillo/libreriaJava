@@ -56,21 +56,11 @@ public class Queue <T> {
         }
         
     }
-     public void deleteAll(){
-         nodeClass temp;
-         if(!isEmpty()){
-             temp=last;
-             last.setData(null);
-             while(temp.getNext() != first){
-                 temp.setNext(null);
-                 temp= temp.getNext();
-                 
-             }
-             temp.setNext(null);
-             first=temp;
-             this.size = 0;
-         }
-     }
+  public void setEmpty(){
+        this.first = null;
+        this.last = null;
+        this.size=0;
+    }
             
     public boolean isEmpty(){
         return first==null;

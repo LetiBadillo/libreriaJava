@@ -62,7 +62,6 @@ public class Stack <T> {
             System.out.println("↓");
             aux=aux.getNext();
         }while (aux!= null);
-            System.out.println("");
       }
     }
 }
