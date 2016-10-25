@@ -72,6 +72,7 @@ public boolean eNode(T data){
         } 
         if(aux==last){
             eNodeLast();
+            return true;
         }else{
             aux.getPrev().setNext(aux.getNext());
             //aux.prev.next=aux.next;
@@ -99,6 +100,7 @@ public void eNodeLast(){
     //se mueve el apuntador final al previo
     //last=last.getPrev();
     
+    last= last.getPrev();
     //se marca el siguiente como nulo
     last.setNext(null);
     
