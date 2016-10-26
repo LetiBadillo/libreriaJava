@@ -45,46 +45,43 @@ public class listaDoble<T> {
     public boolean isEmpty(){
         return first==null && last==null;
     }
-    
-    public nodeDL searchNode(T data){ //busca node
+     private nodeDL searchNode(T data) {
         nodeDL aux;
-        if(isEmpty()){
-            return null; //si està vacìa regresa falso
-        } else{ //si contiene elementos
-            aux=first; //colocamos auxiliar al inicio de la lista
-            while(aux.getData()!=data && aux!=last){ //mientras que no encuentre el dato o no llegue al final de la lista
-                aux=aux.getNext(); //recorrer la lista
-            } 
-                return aux;//Teoría Montiel
-            }
-    }
-
-
-public boolean eNode(T data){
-    nodeDL aux= searchNode(data);
-    if(aux==null){
-    System.out.println("No se encontró el nodo");
-    return false;
-}else{ 
-        if(aux==first){
-            eNodeFirst();
-            return true;
-        } 
-        if(aux==last){
-            eNodeLast();
-            return true;
-        }else{
-            aux.getPrev().setNext(aux.getNext());
-            //aux.prev.next=aux.next;
+        if (isEmpty()) {
+            return null; 
+        } else { //Si contiene elementos
+            aux = first; //se inicia auz
             
-            aux.getNext().setPrev(aux.getPrev());
-            //aux.setPrev(aux.getNext().getPrev());
-            //aux.next.prev=aux.prev;
+            try {
+                while (aux.getData() != data /*&& aux != null*/) { //
+                    aux = aux.getNext();
+                }
+            } catch (NullPointerException e) {
+                return null;
+            }
+            if (aux.getData() == data) { 
+                return aux;
+            }
         }
-            return true;
-        }
+        
+        return null;
+    }
     
-}
+public boolean eNode(T data) {
+        nodeDL aux = searchNode(data);
+        if (aux == null) {
+            System.out.println("No encontrado");
+            return false;
+        } else if (aux == first) {
+            eNodeFirst();
+        } else if (aux == last) {
+            eNodeLast();
+        } else {
+            aux.getNext().setPrev(aux.getPrev());
+            aux.getPrev().setNext(aux.getNext());
+        }
+        return true;
+    }
 
 public void eNodeFirst(){
     //se mueve el apuntador first al siguiente

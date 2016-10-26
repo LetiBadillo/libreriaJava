@@ -32,27 +32,26 @@ public class Queue <T> {
         if(isEmpty()){
             this.first = node;
             this.last = node;
-            ++this.size;
+            
         }else {
             //Analizar
             node.setNext(node);
             last = node;
-            
+           
         }
-        
+        ++this.size;
     }
  
 
     public void deleteFirst(){
-        nodeClass temp;
-        if(!isEmpty()){
-            temp= last;
-            while(temp.getNext()!= first){
-                temp= temp.getNext();
-            }
+          nodeClass temp;
+        
+        if (!isEmpty()) {
+            temp = last;
+            while (temp.getNext() != first) { temp = temp.getNext();}
             temp.setNext(null);
             first = temp;
-            --this.size;
+            --size;
         }
         
     }

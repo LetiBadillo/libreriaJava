@@ -18,8 +18,8 @@ public class Stack <T> {
         this.size=0;
     }
     //return stack top
-    public nodeClass getTop() {
-        return top;
+    public Object getTop() {
+        return top.getData().toString();
     }
     //tamaño pila
     public int getSize() {
@@ -59,9 +59,9 @@ public class Stack <T> {
         nodeClass aux = top;
         do {
             System.out.println(aux.getData());
-            System.out.println("↓");
             aux=aux.getNext();
         }while (aux!= null);
       }
     }
+
 }
