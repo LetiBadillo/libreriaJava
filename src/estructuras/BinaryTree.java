@@ -92,7 +92,7 @@ public class BinaryTree <T>{
                 if (getHijos(raiz.left)) {
                     raiz.left = null;
                 }
-                if (Hijos(raiz.left)) {
+                if (espacio(raiz.left)) {
                     nodeT aux = enLugar(raiz.left);
                     eNode((int)aux.data, raiz.left,0);
                     raiz.left.data = aux.data; 
@@ -102,7 +102,7 @@ public class BinaryTree <T>{
                 if (getHijos(raiz.right)) {
                     raiz.right = null;
                 }
-                if (Hijos(raiz.right)) {// tiene subarbol
+                if (espacio(raiz.right)) {// tiene subarbol
                    nodeT aux = enLugar(raiz.right);
                     eNode((int)aux.data, raiz.right,0);
                     raiz.right.data = aux.data;
@@ -128,7 +128,7 @@ public class BinaryTree <T>{
          return false;   
         }
     }
-    public boolean Hijos(nodeT node) {
+    public boolean espacio(nodeT node) {
         if (node==null) {
             return false;
         }
