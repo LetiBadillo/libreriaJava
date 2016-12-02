@@ -29,20 +29,23 @@ public class Stack <T> {
     public boolean isEmpty(){
         return top==null;
     }
+     public void empty (){
+        top = null;
+        size = 0;
+    }
     
 //inserta en las cosas
     
-  public void push(T data){
-     nodeClass node = new nodeClass(data);
-     
-     if(isEmpty()){ //Si la pila está vacía
-         top = node;
-     }else{
-       node.setNext(top);
-       top=node;
-     }
-     ++size;
-  }
+   public void push (T data){
+        nodeClass node = new nodeClass(data);
+        if (isEmpty()){ //si la pila está vacía
+            top = node;
+        }else{ //Si la pila no está vacía
+            node.setNext(top);
+            top = node;
+        }
+        ++size;
+    }
   
   public void pop(){
       if (!isEmpty()){

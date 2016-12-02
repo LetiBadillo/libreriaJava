@@ -12,7 +12,7 @@ package estructuras;
 public class nodeClass <T>{
     //Atributes
     private  T data;
-    private nodeClass next;
+    nodeClass next;
     //Constructor
     public nodeClass (T data){
         this.data= data;
