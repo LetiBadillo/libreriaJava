@@ -10,17 +10,17 @@ package estructuras;
  * @author ASUS
  */
 public class nodeT <T>{
-    int data;
+    T data;
     nodeT left;
     nodeT right;
     
-    public nodeT(int data){
+    public nodeT(T data){
         this.data= data;
         this.left= null;
         this.right= null;
     }
     
-    public nodeT(int data, nodeT left, nodeT right){
+    public nodeT(T data, nodeT left, nodeT right){
         this.data= data;
         this.left=null;
         this.right= null;

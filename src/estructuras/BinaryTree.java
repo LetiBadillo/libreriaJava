@@ -9,104 +9,194 @@ package estructuras;
  *h
  * @author ASUS
  */
-public class BinaryTree {
-nodeT root;    
-int height;
-int elements;
+public class BinaryTree <T>{
 
-public BinaryTree(){
-    this.root= null;
-    this.height=-1;
-    this.elements=0;
+    nodeT root;
+    int elements;
+    
+    //Constructor
+    public BinaryTree(){
+        this.root=null;
+        this.elements=0;
+    }
+    public nodeT getRoot(){
+    return this.root;
 }
-
-public boolean isEmpty(){
-    return this.root==null;
-}
-
-public void insert(int data, nodeT root){
-    nodeT node = new nodeT(data);
-    if(isEmpty()){
-        this.root= node;
-        this.height++;
-    }else{ ///si no está vacía
-        //si el nodo es mayor que raíz
-        if(this.root.data <= node.data){
-            if(root.left==null){ //caso  base
-                    root.left= node;
-                    this.height++;
-                }else{
-                    //buscará por la izquierda
-                    insert(data, root.left);
-                } 
-            
-        }if(this.root.data >= node.data){ //si no es mayor que la raíz
-            if (root.right==null){ //Caso base
-                root.right= node;
-                this.height++;
-            }else{ //si tiene un elemento a la derecha buscará por la derecha hasta encontrar un espacillo
-                insert(data, root.right);
+    public int getElements(){
+        return elements;
+    }
+    public boolean rootEmpty(){ 
+        return this.root == null;
+    }
+    public void insertNode(int data, nodeT raiz) {
+        nodeT nodo = new nodeT(data);
+        if (rootEmpty()) {
+            this.root = nodo;
+            elements++;
+        } else {
+            if ((int) nodo.data >= (int) raiz.data) {
+                if (raiz.left == null) {
+                    raiz.left = nodo;
+                    elements++;
+                } else {
+                    insertNode(data, raiz.left);
+                }
+            } else {
+                if (raiz.right == null) {
+                    raiz.right = nodo;
+                    elements++;
+                } else {
+                    insertNode(data, raiz.right);
+                }
             }
         }
     }
-        this.elements++;
-    
-    
-}
-
-public boolean searchNode(nodeT root, int data){
-    nodeT search = new nodeT(data);
-    nodeT r= new nodeT(root.data);
-    if(!isEmpty()){
-     if(r.data==search.data) return true;   
-     if(r.left != null && r.data<search.data) //si el nodo a buscar es menor que la raíz y la izquierda de la raíz no es null 
-        searchNode(r.left, search.data);
-     if(r.right != null && r.data > search.data) //si el nodo es mayor que la raíz y la derecha no es null
-        searchNode(r.right, search.data);
+    public boolean roots(nodeT n, int dato){
+        if (n==null) {
+            return false;
+        }
+        if (n.right==null && n.left==null) {
+            return false;
+        }
+        if (n.left==null) {
+            return (int) n.right.data != dato;
+        }
+        if (n.right==null) {
+            return (int) n.left.data != dato;
+        }
+        return (int) n.left.data != dato && (int) n.right.data != dato;
     }
-    return false;
-}
-public nodeT getRoot(){
-    return this.root;
-}
-
-public void deleteNode(int data){
-    if(!isEmpty()){
-        
+    public boolean compare(nodeT n, int dato){
+        if (n==null) {
+            return false;
+        }
+        return n.data.equals(dato);
     }
+    public void eNode(int dato, nodeT raiz, int i) {
+        if (searchNode(dato, raiz)) {
+            while (roots (raiz, dato)) {
+                if (dato > (int) raiz.data) {
+                    raiz = raiz.left;
+                }else{
+                if (dato < (int) raiz.data) {
+                    raiz = raiz.right;
+                }
+                }
+            }
+            if (compare(raiz.left, dato)) {
+                if (getHijos(raiz.left)) {
+                    raiz.left = null;
+                }
+                if (Hijos(raiz.left)) {
+                    nodeT aux = enLugar(raiz.left);
+                    eNode((int)aux.data, raiz.left,0);
+                    raiz.left.data = aux.data; 
+                }
+            }
+            if (compare(raiz.right, dato)) {
+                if (getHijos(raiz.right)) {
+                    raiz.right = null;
+                }
+                if (Hijos(raiz.right)) {// tiene subarbol
+                   nodeT aux = enLugar(raiz.right);
+                    eNode((int)aux.data, raiz.right,0);
+                    raiz.right.data = aux.data;
+                }
+            }
+            elements=elements+i;
+        } else {
+            System.out.println("No se encontró el elemento");
+        }
+    }
+    public int getHeight(nodeT node){
+        if (node != null) {
+            return 1+Math.max(getHeight(node.left), getHeight(node.right));
+        }else{
+            return -1;
+        }
+    }
+   
+    public boolean getHijos(nodeT node) {
+        if (node!=null) {
+        return node.left == null && node.right == null;
+        }else{
+         return false;   
+        }
+    }
+    public boolean Hijos(nodeT n) {
+        if (n==null) {
+            return false;
+        }
+        if (n.left==null && n.right==null) {
+            return false;
+        }
+        if (n.left==null && n.right!=null) {
+            return true;
+        }
+        if (n.right==null && n.left!=null) {
+            return true;
+        }
+        return n.left != null || n.right != null;
+    }
+    public nodeT enLugar(nodeT node) {
+        if (node.left == null) {
+            return node.right;
+        } else {
+            if (node.left.right == null) {
+                return node.left;
+            } else {
+                node = node.left.right;
+                while (node.right != null) {
+                    node = node.right;
+                }
+                return node;
+            }
+        }
+    }
+    public boolean searchNode(int dato, nodeT raiz) {
+        if (raiz == null) {return false;}
+        if ((int)raiz.data==(dato)) {return true;}
+        if ((int)raiz.data<dato) {return searchNode(dato, raiz.left);}
+        if ((int)raiz.data>dato) {return searchNode(dato, raiz.right);}
+        return searchNode(dato, raiz);
 
-}
-public void postOrder(nodeT root) {  
-  if(root !=  null) {  
-   postOrder(root.left);  
-   postOrder(root.right);  
-   System.out.printf("%d ",root.data);  
-  }  
- }
-//commit
-public void inOrder(nodeT root) {  
-  if(root !=  null) {  
-   inOrder(root.left);  
-   System.out.printf("%d ",root.data);  
-   inOrder(root.right);  
-  }  
- }
-public void preorder(nodeT root) {  
-    if(root !=  null) {  
-   //Visit the node by Printing the node data    
-      System.out.printf("%d ",root.data);  
-      preorder(root.left);  
-      preorder(root.right);  
-    }}
+    }
     
+    public void preOrder(nodeT raiz, boolean right, boolean left) {
+        System.out.print("[" + raiz.data + "] ");
+        while (right == false && raiz.right != null) {
+            preOrder(raiz.right, right, false);
+            right = true;
+        }
+        while (raiz.left != null && left == false) {
+            preOrder(raiz.left, false, left);
+            left = true;
+        }
+    }
     
-    public int getHeight(){
-        return this.height;
+    public void postOrder(nodeT raiz, boolean right, boolean left) {
+        while (right == false && raiz.right != null) {
+            postOrder(raiz.right, right, false);
+            right = true;
+        }
+        while (raiz.left != null && left == false) {
+            postOrder(raiz.left, false, left);
+            left = true;
+        }
+        System.out.print("[" + raiz.data + "] ");
     }
-  
-    public int getElements(){
-      return this.elements;  
+    
+    public void inOrder(nodeT raiz, boolean right, boolean left) {
+        while (right == false && raiz.right != null) {
+            inOrder(raiz.right, right, false);
+            right = true;
+        }
+        System.out.print("[" + raiz.data + "] ");
+        while (raiz.left != null && left == false) {
+            inOrder(raiz.left, false, left);
+            left = true;
+        }
     }
-
+    
 
 }
