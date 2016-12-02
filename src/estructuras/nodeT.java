@@ -6,7 +6,7 @@
 package estructuras;
 
 /**h
- *
+ *j
  * @author ASUS
  */
 public class nodeT <T>{
