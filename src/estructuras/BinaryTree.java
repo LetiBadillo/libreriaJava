@@ -80,12 +80,12 @@ public class BinaryTree <T>{
     public void eNode(int dato, nodeT raiz, int i) {
         if (searchNode(dato, raiz)) {
             while (roots (raiz, dato)) {
-                if (dato > (int) raiz.data) {
+                if (dato>(int) raiz.data) {
                     raiz = raiz.left;
                 }else{
-                if (dato < (int) raiz.data) {
+                if (dato<(int) raiz.data) {
                     raiz = raiz.right;
-                }
+                    }
                 }
             }
             if (compare(raiz.left, dato)) {
@@ -128,20 +128,20 @@ public class BinaryTree <T>{
          return false;   
         }
     }
-    public boolean Hijos(nodeT n) {
-        if (n==null) {
+    public boolean Hijos(nodeT node) {
+        if (node==null) {
             return false;
         }
-        if (n.left==null && n.right==null) {
+        if (node.left==null && node.right==null) {
             return false;
         }
-        if (n.left==null && n.right!=null) {
+        if (node.left==null && node.right!=null) {
             return true;
         }
-        if (n.right==null && n.left!=null) {
+        if (node.right==null && node.left!=null) {
             return true;
         }
-        return n.left != null || n.right != null;
+        return node.left != null || node.right != null;
     }
     
     
