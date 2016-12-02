@@ -83,7 +83,7 @@ public void postOrder(nodeT root) {
    System.out.printf("%d ",root.data);  
   }  
  }
-
+//commit
 public void inOrder(nodeT root) {  
   if(root !=  null) {  
    inOrder(root.left);  
