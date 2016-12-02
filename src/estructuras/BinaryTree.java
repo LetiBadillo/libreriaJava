@@ -51,26 +51,31 @@ public class BinaryTree <T>{
             }
         }
     }
+    public boolean searchNode(int dato, nodeT raiz) {
+        if (raiz == null) {return false;}
+        if ((int)raiz.data==(dato)) {return true;}
+        if ((int)raiz.data<dato) {return searchNode(dato, raiz.left);}
+        if ((int)raiz.data>dato) {return searchNode(dato, raiz.right);}
+        return searchNode(dato, raiz);
+
+    }
+    
     public boolean roots(nodeT n, int dato){
-        if (n==null) {
-            return false;
-        }
+        if (n==null) {return false;}
         if (n.right==null && n.left==null) {
-            return false;
-        }
+            return false;}
         if (n.left==null) {
-            return (int) n.right.data != dato;
-        }
-        if (n.right==null) {
-            return (int) n.left.data != dato;
-        }
+            return (int) n.right.data != dato;}
+        if (n.right==null) {return (int) n.left.data != dato;}
         return (int) n.left.data != dato && (int) n.right.data != dato;
     }
-    public boolean compare(nodeT n, int dato){
-        if (n==null) {
-            return false;
-        }
-        return n.data.equals(dato);
+    
+    public boolean compare(nodeT node, int dato){
+         if (node!=null) {
+             return node.data.equals(dato);
+        }else{
+             return false;
+         }
     }
     public void eNode(int dato, nodeT raiz, int i) {
         if (searchNode(dato, raiz)) {
@@ -138,6 +143,8 @@ public class BinaryTree <T>{
         }
         return n.left != null || n.right != null;
     }
+    
+    
     public nodeT enLugar(nodeT node) {
         if (node.left == null) {
             return node.right;
@@ -153,14 +160,7 @@ public class BinaryTree <T>{
             }
         }
     }
-    public boolean searchNode(int dato, nodeT raiz) {
-        if (raiz == null) {return false;}
-        if ((int)raiz.data==(dato)) {return true;}
-        if ((int)raiz.data<dato) {return searchNode(dato, raiz.left);}
-        if ((int)raiz.data>dato) {return searchNode(dato, raiz.right);}
-        return searchNode(dato, raiz);
-
-    }
+    
     
     public void preOrder(nodeT raiz, boolean right, boolean left) {
         System.out.print("[" + raiz.data + "] ");
